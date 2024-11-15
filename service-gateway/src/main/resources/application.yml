@@ -1,0 +1,79 @@
+logging:
+  level:
+    org.springframework: DEBUG
+    org.springframework.cloud.gateway: TRACE
+
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-producto
+          uri: http://localhost:8001
+          predicates:
+            - Path=/api/almacen/**
+          filters:
+            - StripPrefix=2
+        - id: service-empleado
+          uri: http://localhost:8009
+          predicates:
+            - Path=/api/rrhh/**
+          filters:
+            - StripPrefix=2
+        - id: service-doc-compra
+          uri: http://localhost:8008
+          predicates:
+            - Path=/api/doc-compra/**
+          filters:
+            - StripPrefix=2
+        - id: service-cotizacion
+          uri: http://localhost:8005
+          predicates:
+            - Path=/api/cotizacion/**
+          filters:
+            - StripPrefix=2
+        - id: service-cliente
+          uri: http://localhost:3001
+          predicates:
+            - Path=/api/cliente/**
+          filters:
+            - StripPrefix=2
+        - id: service-pedido
+          uri: http://localhost:3002
+          predicates:
+            - Path=/api/pedido/**
+          filters:
+            - StripPrefix=2
+        - id: service-proveedor
+          uri: http://localhost:8010
+          predicates:
+            - Path=/api/proveedor/**
+          filters:
+            - StripPrefix=2
+        - id: service-factura-venta
+          uri: http://localhost:3003
+          predicates:
+            - Path=/api/facturaventa/**
+          filters:
+            - StripPrefix=2
+
+server:
+  port: 9000
