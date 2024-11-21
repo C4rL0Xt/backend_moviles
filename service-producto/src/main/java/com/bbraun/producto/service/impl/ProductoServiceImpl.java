@@ -1,14 +1,9 @@
 package com.bbraun.producto.service.impl;
 
 
-import com.bbraun.producto.models.dto.LoteDTO;
-import com.bbraun.producto.models.dto.LotePresentationDto;
-import com.bbraun.producto.models.dto.ProductoDTO;
-import com.bbraun.producto.models.dto.ProductoPresentationDto;
+import com.bbraun.producto.models.dto.*;
 import com.bbraun.producto.models.entity.FormaFarmaceutica;
 import com.bbraun.producto.models.entity.Lote;
-import com.bbraun.producto.models.proyeccion.LoteProjection;
-import com.bbraun.producto.models.proyeccion.ProductoProjection;
 import com.bbraun.producto.repository.ProductoRepository;
 import com.bbraun.producto.models.entity.Categoria;
 import com.bbraun.producto.models.entity.Producto;
@@ -43,6 +38,8 @@ public class ProductoServiceImpl implements IProductoService {
     private ProductoConverter productoConverter;
     @Autowired
     private LoteConverter loteConverter;
+    @Autowired
+    private ProductoRepository productoRepository;
 
 
     @Override
@@ -216,5 +213,34 @@ public class ProductoServiceImpl implements IProductoService {
         }
         dto.setLots(lots);
         return dto;
+    }
+
+    @Override
+    public LowerStockProductDto getLowerStockProduct() {
+
+        List<Object[]> data = productoRepository.getLowerStockProduct();
+
+
+
+        return LowerStockProductDto.builder()
+                .productoId(data.get(0)[0].toString())
+                .nombre(data.get(0)[1].toString())
+                .stock(Integer.parseInt(data.get(0)[2].toString()))
+                .concentracion(data.get(0)[3].toString())
+                .build();
+    }
+
+    @Override
+    public ExpiringProductDto getExpiringProduct() {
+
+        List<Object[]> data = productoRepository.getExpiringProduct();
+
+        return ExpiringProductDto.builder()
+                .productId(data.get(0)[0].toString())
+                .nombre(data.get(0)[1].toString())
+                .concentracion(data.get(0)[2].toString())
+                .loteId(data.get(0)[3].toString())
+                .fechaExpiracion(data.get(0)[4].toString())
+                .build();
     }
 }

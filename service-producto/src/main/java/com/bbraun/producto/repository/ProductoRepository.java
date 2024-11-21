@@ -1,9 +1,7 @@
 package com.bbraun.producto.repository;
 
-import com.bbraun.producto.models.dto.ProductoPresentationDto;
 import com.bbraun.producto.models.entity.Categoria;
 import com.bbraun.producto.models.entity.Producto;
-import com.bbraun.producto.models.proyeccion.ProductoProjection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -25,5 +23,23 @@ public interface ProductoRepository extends CrudRepository<Producto,String> {
     List<String> getLastCodeProducto();
 
     Producto findByNombreAndAndConcentracion(String nombre, String concentracion);
+
+
+    @Query(value = "SELECT p.id_producto, p.nombre, SUM(l.stock), p.concentracion from productos p"
+            +" JOIN lotes l "+
+            "ON l.idproducto = p.id_producto " +
+            "GROUP BY p.id_producto "+
+            " ORDER BY SUM(l.stock) "+
+            " LIMIT 3;", nativeQuery = true)
+    List<Object[]> getLowerStockProduct();
+
+
+    @Query(value = "SELECT p.id_producto, p.nombre, p.concentracion, l.idlote, l.fechavencimiento from productos p " +
+                     "JOIN lotes l "+
+            "ON l.idproducto = p.id_producto " +
+                    " ORDER BY l.fechavencimiento " +
+                    "LIMIT 3;", nativeQuery = true)
+    List<Object[]> getExpiringProduct();
+
 
 }

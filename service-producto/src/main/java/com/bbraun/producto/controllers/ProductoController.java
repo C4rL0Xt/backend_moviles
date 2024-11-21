@@ -4,11 +4,11 @@ package com.bbraun.producto.controllers;
 
 import com.bbraun.producto.exception.InvalidDataException;
 import com.bbraun.producto.exception.ResourceNotFoundException;
+import com.bbraun.producto.models.dto.ExpiringProductDto;
+import com.bbraun.producto.models.dto.LowerStockProductDto;
 import com.bbraun.producto.models.dto.ProductoDTO;
 import com.bbraun.producto.models.dto.ProductoPresentationDto;
 import com.bbraun.producto.models.entity.Categoria;
-import com.bbraun.producto.models.entity.FormaFarmaceutica;
-import com.bbraun.producto.models.entity.Lote;
 import com.bbraun.producto.models.entity.Producto;
 import com.bbraun.producto.service.ICategoriaService;
 import com.bbraun.producto.service.IFormaFarmaceuticaService;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -124,6 +123,18 @@ public class ProductoController {
         }catch (InvalidDataException e){
             return ResponseEntity.badRequest().build();
         }
+    }
+
+
+    @GetMapping("/lowerstock")
+    public LowerStockProductDto getLowerStockProduct() {
+        return productoService.getLowerStockProduct();
+    }
+
+
+    @GetMapping("/expiring")
+    public ExpiringProductDto getExpiringProduct() {
+        return productoService.getExpiringProduct();
     }
 
 

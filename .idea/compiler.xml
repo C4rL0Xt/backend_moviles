@@ -2,11 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="demo-jwt" />
+        <module name="producto" />
         <module name="gateway" />
         <module name="service-empleado" />
       </profile>
@@ -16,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo-jwt" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="producto" options="-parameters" />
       <module name="service-empleado" options="-parameters" />
     </option>
   </component>

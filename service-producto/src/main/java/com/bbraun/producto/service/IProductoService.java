@@ -1,11 +1,11 @@
 package com.bbraun.producto.service;
 
+import com.bbraun.producto.models.dto.ExpiringProductDto;
+import com.bbraun.producto.models.dto.LowerStockProductDto;
 import com.bbraun.producto.models.dto.ProductoDTO;
 import com.bbraun.producto.models.dto.ProductoPresentationDto;
 import com.bbraun.producto.models.entity.Categoria;
-import com.bbraun.producto.models.entity.Lote;
 import com.bbraun.producto.models.entity.Producto;
-import com.bbraun.producto.models.proyeccion.ProductoProjection;
 
 import java.util.List;
 
@@ -36,6 +36,10 @@ public interface IProductoService {
     public Producto updateProductoWithLots( ProductoPresentationDto dto);
 
     public ProductoPresentationDto findProductoWithLots(String id);
+
+    LowerStockProductDto getLowerStockProduct();
+
+    ExpiringProductDto getExpiringProduct();
 
 
 }
