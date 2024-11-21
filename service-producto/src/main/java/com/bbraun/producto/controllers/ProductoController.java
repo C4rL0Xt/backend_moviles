@@ -137,6 +137,11 @@ public class ProductoController {
         return productoService.getExpiringProduct();
     }
 
+    @GetMapping("/total")
+    public Integer getQuantityProducts() {
+        return productoService.getQuantityProducts();
+    }
+
 
 
 

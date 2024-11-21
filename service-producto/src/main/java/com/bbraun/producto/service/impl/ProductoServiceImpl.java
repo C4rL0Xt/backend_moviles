@@ -243,4 +243,9 @@ public class ProductoServiceImpl implements IProductoService {
                 .fechaExpiracion(data.get(0)[4].toString())
                 .build();
     }
+
+    @Override
+    public Integer getQuantityProducts() {
+        return productoRepository.getQuantityProduct();
+    }
 }

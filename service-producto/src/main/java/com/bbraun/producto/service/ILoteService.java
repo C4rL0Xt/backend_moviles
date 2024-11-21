@@ -18,4 +18,6 @@ public interface ILoteService {
 
     public String getLastCodeLote();
 
+    Integer getTotalLotes();
+
 }

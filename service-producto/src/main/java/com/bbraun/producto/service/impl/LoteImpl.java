@@ -45,4 +45,9 @@ public class LoteImpl implements ILoteService {
     public String getLastCodeLote() {
         return loteRepository.getLastCodeLote().get(0);
     }
+
+    @Override
+    public Integer getTotalLotes() {
+        return loteRepository.getTotalLotes();
+    }
 }

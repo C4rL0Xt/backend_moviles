@@ -18,4 +18,7 @@ public interface LoteRepository extends JpaRepository<Lote,String> {
     @Query("SELECT l.idlote from Lote l order by l.idlote desc")
     List<String> getLastCodeLote();
 
+    @Query(value = " SELECT COUNT(*) from lotes; ", nativeQuery = true)
+    Integer getTotalLotes();
+
 }

@@ -41,5 +41,7 @@ public interface IProductoService {
 
     ExpiringProductDto getExpiringProduct();
 
+    Integer getQuantityProducts();
+
 
 }

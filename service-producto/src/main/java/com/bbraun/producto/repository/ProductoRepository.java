@@ -41,5 +41,7 @@ public interface ProductoRepository extends CrudRepository<Producto,String> {
                     "LIMIT 3;", nativeQuery = true)
     List<Object[]> getExpiringProduct();
 
+    @Query(value = " SELECT COUNT(*) from productos; ", nativeQuery = true)
+    Integer getQuantityProduct();
 
 }

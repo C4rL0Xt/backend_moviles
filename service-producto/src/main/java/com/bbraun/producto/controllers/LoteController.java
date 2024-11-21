@@ -31,4 +31,9 @@ public class LoteController {
     public String getLastCodeLote(){
         return loteService.getLastCodeLote();
     }
+
+    @GetMapping("/total")
+    public Integer getTotalLotes() {
+        return loteService.getTotalLotes();
+    }
 }

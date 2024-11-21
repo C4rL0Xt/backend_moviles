@@ -1,5 +1,6 @@
 package com.bbraun.producto.service;
 
+import com.bbraun.producto.models.dto.CategoryChartDto;
 import com.bbraun.producto.models.entity.Categoria;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface ICategoriaService {
     public List<String> findAllCat();
 
     Categoria findByName(String nombre);
+
+    List<CategoryChartDto> getQuantityByCategory();
+
+    Integer getTotalCategorias();
 }
