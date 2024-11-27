@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="demo-jwt" />
         <module name="producto" />
+        <module name="service-cotizacion" />
         <module name="gateway" />
         <module name="service-empleado" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="demo-jwt" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="producto" options="-parameters" />
+      <module name="service-cotizacion" options="-parameters" />
       <module name="service-empleado" options="-parameters" />
     </option>
   </component>
