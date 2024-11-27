@@ -23,6 +23,7 @@ public class JwtService {
     public String getToken(UserDetails user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("email", user.getUsername());
+        extraClaims.put("ROL", user.getAuthorities().stream().findFirst().get().getAuthority());
         extraClaims.put("roles", user.getAuthorities().stream()
                 .map(role -> role.getAuthority())
                 .toList());
