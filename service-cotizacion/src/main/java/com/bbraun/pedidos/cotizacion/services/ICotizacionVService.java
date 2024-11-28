@@ -26,4 +26,6 @@ public interface ICotizacionVService {
     public CotizacionVentaDTO calculateMontos(CotizacionVentaDTO cotizacionVentaDTO);
 
     public CotizacionVenta updateCotizacionVentaWithDetails(CotizacionVentaDTO cotizacionVentaDTO);
+
+    CotizacionVentaDTO findByIdWithDetails(String id);
 }

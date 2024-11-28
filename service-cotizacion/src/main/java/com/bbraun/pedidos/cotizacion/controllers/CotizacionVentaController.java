@@ -64,9 +64,11 @@ public class CotizacionVentaController {
     }
 
     @GetMapping("/last-code")
-    public String lastCode(){
-        return cotizacionVService.lastCode();
+    public ResponseEntity<String> lastCode(){
+        String code = cotizacionVService.lastCode();
+        return ResponseEntity.ok().body(code);
     }
+
     @GetMapping("/details-full")
     public List<CotizacionVentaDTO> listCotiDetails(){
         return cotizacionVService.findAllWithDetails();
@@ -90,6 +92,7 @@ public class CotizacionVentaController {
 
     @PutMapping("/update")
     public CotizacionVenta updateCotizacion(@RequestBody CotizacionVentaDTO dto){
+        System.out.println("CHI" + dto.toString());
         return cotizacionVService.updateCotizacionVentaWithDetails(dto);
     }
 
@@ -98,10 +101,17 @@ public class CotizacionVentaController {
        detalleCotiVenta.delete(dto);
     }
 
+    @GetMapping("/get/{id}")
+    public CotizacionVentaDTO getByIdWithDetails(@PathVariable String id) {
+        return cotizacionVService.findByIdWithDetails(id);
+    }
+
     @GetMapping("/pdf/{id}")
     public ResponseEntity<byte[]> getCotizacionPdf(@PathVariable String id){
         try {
-            CotizacionDtoPDF cotizacion = cotizacionVService.findCotizacionById(id);
+            CotizacionDtoPDF cotizacion = cotizacionVService.findCotizacionById
+
+                    (id);
             if(cotizacion == null){
                 logger.warn("Cotización no encontrada con el ID: " + id);
                 return ResponseEntity.notFound().build();

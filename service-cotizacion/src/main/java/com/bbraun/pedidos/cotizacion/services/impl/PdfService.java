@@ -4,7 +4,6 @@ package com.bbraun.pedidos.cotizacion.services.impl;
 import com.bbraun.pedidos.cotizacion.models.dto.CotizacionDtoPDF;
 import com.bbraun.pedidos.cotizacion.models.dto.DetalleDtoPDF;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
@@ -17,12 +16,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Service
@@ -46,16 +42,16 @@ public class PdfService {
        }
 
        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d 'de' MMMM 'del' yyyy", new Locale("es", "ES"));
-       String fechaFormateada = sdf.format(cotizacion.getFecha_emision());
+       String fechaFormateada = sdf.format(cotizacion.getFechaemision());
 
 
        fillField(acroForm, "nombrecliente", cotizacion.getNombrecliente());
-       fillField(acroForm, "dnicliente", cotizacion.getDnicliente());
+       fillField(acroForm, "dnicliente", cotizacion.getDni());
        fillField(acroForm, "fechaemision",fechaFormateada );
        fillField(acroForm, "departamento", cotizacion.getDepartamento());
-       fillField(acroForm, "montototal", Math.round(cotizacion.getMontototal()) + ".00");
-       fillField(acroForm, "impuestos", Math.round(cotizacion.getImpuestos()) + ".00");
-       fillField(acroForm, "total", Math.round(cotizacion.getTotal()) + ".00");
+       fillField(acroForm, "montototal", Math.round(cotizacion.getMontoproducto()) + ".00");
+       fillField(acroForm, "impuestos", Math.round(cotizacion.getMontoimpuesto()) + ".00");
+       fillField(acroForm, "total", Math.round(cotizacion.getMontototal()) + ".00");
        float xProducto = 70;
        float xCantidad = 240;
        float xPrecioUnitario = 350;

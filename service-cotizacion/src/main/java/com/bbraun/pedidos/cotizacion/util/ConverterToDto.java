@@ -15,11 +15,11 @@ public class ConverterToDto {
     public CotizacionDtoPDF convertCotizacionEntityToDto(CotizacionVenta cotizacionVenta, List<DetalleDtoPDF> detalles){
         CotizacionDtoPDF cotizacionDto = CotizacionDtoPDF.builder()
                 .nombrecliente(cotizacionVenta.getNombre_cliente())
-                .montototal(cotizacionVenta.getMonto_producto())
-                .fecha_emision(cotizacionVenta.getFecha_emision())
-                .impuestos(cotizacionVenta.getMonto_impuesto())
-                .total(cotizacionVenta.getMonto_total())
-                .dnicliente(cotizacionVenta.getDni())
+                .montoproducto(cotizacionVenta.getMonto_producto())
+                .fechaemision(cotizacionVenta.getFecha_emision())
+                .montoimpuesto(cotizacionVenta.getMonto_impuesto())
+                .montototal(cotizacionVenta.getMonto_total())
+                .dni(cotizacionVenta.getDni())
                 .departamento(cotizacionVenta.getId_departamento().getNombreDepartamento())
                 .detalles(detalles)
                 .build();

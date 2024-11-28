@@ -10,7 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CotizacionVentaDTO {
+@ToString
+public class    CotizacionVentaDTO {
     private String idcotizacion;
     private String idempleado;
     private String estado;

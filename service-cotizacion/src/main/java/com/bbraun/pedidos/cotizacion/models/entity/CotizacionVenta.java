@@ -16,6 +16,7 @@ import java.util.Date;
 public class CotizacionVenta {
 
     @Id
+    @Column(name = "id_cotizacion")
     private String id_cotizacion;
     private String id_empleado;
 

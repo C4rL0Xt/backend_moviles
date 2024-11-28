@@ -12,11 +12,11 @@ import java.util.List;
 @Builder
 public class CotizacionDtoPDF {
     private String nombrecliente;
+    private Float montoproducto;
+    private Date fechaemision;
+    private String dni;
+    private Float montoimpuesto;
     private Float montototal;
-    private Date fecha_emision;
-    private String dnicliente;
-    private Float impuestos;
-    private Float total;
     private String departamento;
     private List<DetalleDtoPDF> detalles;
 }

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -76,7 +78,8 @@ public class ProductoController {
     public ProductoPresentationDto findProductoByNombreAndConcentracion(
             @RequestParam("nombre") String nombre,
             @RequestParam("concentracion") String concentracion) {
-        return productoService.findByNombreAndAndConcentracion(nombre, concentracion);
+        String decodedNombre = URLDecoder.decode(nombre, StandardCharsets.UTF_8);
+        return productoService.findByNombreAndAndConcentracion(decodedNombre, concentracion);
     }
 
     @GetMapping("/pro-lot")
