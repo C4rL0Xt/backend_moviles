@@ -1,10 +1,7 @@
 package com.bbraun.pedidos.cotizacion.services.impl;
 
 import com.bbraun.pedidos.cotizacion.models.Producto;
-import com.bbraun.pedidos.cotizacion.models.dto.CotizacionDtoPDF;
-import com.bbraun.pedidos.cotizacion.models.dto.CotizacionVentaDTO;
-import com.bbraun.pedidos.cotizacion.models.dto.DetalleCotizacionVentaDTO;
-import com.bbraun.pedidos.cotizacion.models.dto.DetalleDtoPDF;
+import com.bbraun.pedidos.cotizacion.models.dto.*;
 import com.bbraun.pedidos.cotizacion.models.entity.CotizacionVenta;
 import com.bbraun.pedidos.cotizacion.models.entity.Departamento;
 import com.bbraun.pedidos.cotizacion.models.entity.DetalleCotizacionVenta;
@@ -22,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -280,5 +279,38 @@ public class CotizacionVentaImpl implements ICotizacionVService {
                 .departamento(cotizacionVenta.getId_departamento().getNombreDepartamento())
                 .build();
         return dto;
+    }
+
+    @Override
+    public List<TopCustomer> getTopCustomers() {
+        List<Object[]> data = cotizacionVentaRepository.getTopCustomers();
+        List<TopCustomer> topCustomers = new ArrayList<>();
+
+        for (int i = 0; i < data.size() ; i++) {
+            TopCustomer topCustomer = TopCustomer.builder()
+                    .name(data.get(i)[0].toString())
+                    .totalPurchase(new BigDecimal(data.get(i)[1].toString()).setScale(2, RoundingMode.HALF_UP).doubleValue())
+                    .build();
+            topCustomers.add(topCustomer);
+        }
+
+        return topCustomers;
+    }
+
+    @Override
+    public List<SaleData> getSalesData() {
+        List<Object[]> data = cotizacionVentaRepository.getSalesData();
+        List<SaleData> salesData = new ArrayList<>();
+
+        for (int i = 0; i < data.size() ; i++) {
+            SaleData saleData = SaleData.builder()
+                    .month(data.get(i)[0].toString())
+                    .revenue(new BigDecimal(data.get(i)[1].toString()).setScale(2, RoundingMode.HALF_UP).doubleValue())
+                    .build();
+            salesData.add(saleData);
+        }
+
+
+        return salesData;
     }
 }

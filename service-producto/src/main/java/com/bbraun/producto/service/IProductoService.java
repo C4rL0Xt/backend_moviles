@@ -1,9 +1,6 @@
 package com.bbraun.producto.service;
 
-import com.bbraun.producto.models.dto.ExpiringProductDto;
-import com.bbraun.producto.models.dto.LowerStockProductDto;
-import com.bbraun.producto.models.dto.ProductoDTO;
-import com.bbraun.producto.models.dto.ProductoPresentationDto;
+import com.bbraun.producto.models.dto.*;
 import com.bbraun.producto.models.entity.Categoria;
 import com.bbraun.producto.models.entity.Producto;
 
@@ -42,6 +39,9 @@ public interface IProductoService {
     ExpiringProductDto getExpiringProduct();
 
     Integer getQuantityProducts();
+
+
+    List<ProductMetric> getTopProducts();
 
 
 }

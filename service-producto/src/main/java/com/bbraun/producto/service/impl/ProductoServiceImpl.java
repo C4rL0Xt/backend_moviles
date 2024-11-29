@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -247,5 +249,24 @@ public class ProductoServiceImpl implements IProductoService {
     @Override
     public Integer getQuantityProducts() {
         return productoRepository.getQuantityProduct();
+    }
+
+    @Override
+    public List<ProductMetric> getTopProducts() {
+        List<Object[]> data = productoRepository.getTopProducts();
+        List<ProductMetric> topProducts = new ArrayList<>();
+
+        for (int i = 0; i < data.size() ; i++) {
+            ProductMetric topProduct = ProductMetric.builder()
+                    .name(data.get(i)[0].toString()+" "+ data.get(i)[1].toString())
+                    .unitsSold(Integer.parseInt(data.get(i)[2].toString()))
+                    .revenue(new BigDecimal(data.get(i)[3].toString()).setScale(2, RoundingMode.HALF_UP).doubleValue())
+                    .build();
+
+            topProducts.add(topProduct);
+        }
+
+
+        return topProducts;
     }
 }

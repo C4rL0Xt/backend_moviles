@@ -1,8 +1,6 @@
 package com.bbraun.pedidos.cotizacion.controllers;
 
-import com.bbraun.pedidos.cotizacion.models.dto.CotizacionDtoPDF;
-import com.bbraun.pedidos.cotizacion.models.dto.CotizacionVentaDTO;
-import com.bbraun.pedidos.cotizacion.models.dto.DetalleCotizacionVentaDTO;
+import com.bbraun.pedidos.cotizacion.models.dto.*;
 import com.bbraun.pedidos.cotizacion.models.entity.CotizacionVenta;
 import com.bbraun.pedidos.cotizacion.models.entity.DetalleCotizacionVenta;
 import com.bbraun.pedidos.cotizacion.services.ICotizacionVService;
@@ -128,6 +126,16 @@ public class CotizacionVentaController {
             logger.error("Error al generar el PDF: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/top")
+    public List<TopCustomer> getTopCustomers() {
+        return cotizacionVService.getTopCustomers();
+    }
+
+    @GetMapping("/salesdata")
+    public List<SaleData> getSalesData() {
+        return cotizacionVService.getSalesData();
     }
 
 

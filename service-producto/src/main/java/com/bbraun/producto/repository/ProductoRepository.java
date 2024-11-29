@@ -44,4 +44,16 @@ public interface ProductoRepository extends CrudRepository<Producto,String> {
     @Query(value = " SELECT COUNT(*) from productos; ", nativeQuery = true)
     Integer getQuantityProduct();
 
+    @Query(value = "SELECT p.nombre, p.concentracion, SUM(dv.cantidad), SUM(cv.monto_total) FROM productos p " +
+            "JOIN detalles_cotizacion_venta dv " +
+            "ON dv.idproducto = p.id_producto " +
+            "JOIN cotizaciones_venta cv " +
+            "ON cv.id_cotizacion = dv.idcotizacion " +
+            " JOIN pedidos pe " +
+            "ON pe.idcotizacion = cv.id_cotizacion " +
+            " GROUP BY p.nombre, p.concentracion " +
+            " ORDER BY SUM(dv.cantidad) DESC" +
+            " LIMIT 3;", nativeQuery = true)
+    List<Object[]> getTopProducts();
+
 }

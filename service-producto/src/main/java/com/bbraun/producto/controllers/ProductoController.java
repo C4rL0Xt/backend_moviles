@@ -4,10 +4,7 @@ package com.bbraun.producto.controllers;
 
 import com.bbraun.producto.exception.InvalidDataException;
 import com.bbraun.producto.exception.ResourceNotFoundException;
-import com.bbraun.producto.models.dto.ExpiringProductDto;
-import com.bbraun.producto.models.dto.LowerStockProductDto;
-import com.bbraun.producto.models.dto.ProductoDTO;
-import com.bbraun.producto.models.dto.ProductoPresentationDto;
+import com.bbraun.producto.models.dto.*;
 import com.bbraun.producto.models.entity.Categoria;
 import com.bbraun.producto.models.entity.Producto;
 import com.bbraun.producto.service.ICategoriaService;
@@ -146,6 +143,10 @@ public class ProductoController {
     }
 
 
+    @GetMapping("/top")
+    public List<ProductMetric> getTopProducts() {
+        return productoService.getTopProducts();
+    }
 
 
 

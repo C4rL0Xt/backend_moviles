@@ -2,6 +2,8 @@ package com.bbraun.pedidos.cotizacion.services;
 
 import com.bbraun.pedidos.cotizacion.models.dto.CotizacionDtoPDF;
 import com.bbraun.pedidos.cotizacion.models.dto.CotizacionVentaDTO;
+import com.bbraun.pedidos.cotizacion.models.dto.SaleData;
+import com.bbraun.pedidos.cotizacion.models.dto.TopCustomer;
 import com.bbraun.pedidos.cotizacion.models.entity.CotizacionVenta;
 
 import java.util.List;
@@ -28,4 +30,8 @@ public interface ICotizacionVService {
     public CotizacionVenta updateCotizacionVentaWithDetails(CotizacionVentaDTO cotizacionVentaDTO);
 
     CotizacionVentaDTO findByIdWithDetails(String id);
+
+    List<TopCustomer> getTopCustomers();
+
+    List<SaleData> getSalesData();
 }
